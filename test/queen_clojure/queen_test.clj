@@ -2,6 +2,7 @@
   (:require [clojure.test :refer :all]
             [queen-clojure.queen :refer :all]))
 
-(deftest factorial
-  (testing "sample test"
-    (is (= 1 (queen-clojure.queen/factorial 0)))))
+(testing "factorial"
+  (is (= 1 (factorial 0)))
+  (is (= 1 (factorial 1)))
+  (is (= 120 (factorial 5))))

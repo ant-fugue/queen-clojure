@@ -28,7 +28,7 @@
       result
       (recur (dec n) (* n result)))))
 
-(factorial 3)
+(factorial 5)
 
   ;; (let [x 5]
   ;;   (= :your-road (cond (= x 3) :road-not-taken
