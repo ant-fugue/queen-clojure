@@ -52,7 +52,7 @@
       (recur (dec n) (* n result)))))
 
 (defn factorials-i [n]
-  (map factorial (range (+ n 1))))
+  (mapv factorial (range (+ n 1))))
 
 ;; (prime? 6) -> [2 3 4 5] -> false
 (defn prime? [n]
@@ -94,10 +94,10 @@
 ;; 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
 ;; 493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
 
-;; (apply + (map #(Integer/parseInt %) (clojure.string/split (str 132189) #"")))
+;; (apply + (mapv #(Integer/parseInt %) (clojure.string/split (str 132189) #"")))
 ;; (defn digital-root [n]
 ;;   (defn func [m]
-;;     (apply + (map #(Integer/parseInt %) (clojure.string/split (str m) #""))))
+;;     (apply + (mapv #(Integer/parseInt %) (clojure.string/split (str m) #""))))
 ;;   (loop [result 0 f (func m)])
 ;;   (if (= 1 (count (str n))) result)
 
