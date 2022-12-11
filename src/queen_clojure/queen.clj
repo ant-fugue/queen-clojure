@@ -1,25 +1,29 @@
 (ns queen-clojure.queen)
 
-;; A002064Cullen numbers C(n) = n**2^n+1
-;; [0 1 2 3 4 5] -> [1 3 9 25 65]
-(defn cullen-seq [n]
-  (map #(int (+ 1 (* % (Math/pow 2 %)))) (range 0 n)))
+(defn div-of [n]
+  (loop [i n
+         lst '()]
+    (cond (zero? i) lst
+          (zero? (mod n i)) (recur (dec i) (conj lst i))
+          :else (recur (dec i) lst))))
 
+(defn num-of-div [n]
+  (count (div-of n)))
 
-(cullen-seq 5)
+(defn div-sum [n]
+  (apply + (div-of n)))
 
-;; (defn div-of [n]
-;;   (loop [i n
-;;          lst '()]
-;;     (cond (zero? i) lst
-;;           (zero? (mod n i)) (recur (inc i) (conj lst i))
-;;           :else (recur (inc i) lst))))
+(defn div-of-except-self [n]
+  (let [coll (vec (div-of n))]
+    (cond (zero? (count coll)) '()
+          (= 1 (count coll)) '()
+          :else (subvec coll 0 (dec (count coll))))))
 
-;; (div-of 6)
+(defn num-of-div-except-self [n]
+  (count (div-of-except-self n)))
 
-(->>
- [1 2 3 4 5]
- (#(map inc %)))
+(defn div-sum-except-self [n]
+  (apply + (div-of-except-self n)))
 
 (defn factorial [n]
   (loop [n n
@@ -28,23 +32,8 @@
       result
       (recur (dec n) (* n result)))))
 
-(factorial 5)
-
-  ;; (let [x 5]
-  ;;   (= :your-road (cond (= x 3) :road-not-taken
-  ;;                       (= x 4) :another-road-not-taken
-  ;;                       :else :your-road)))
-
-;; (defn prime? [n]
-;;   (loop [vec (range 2 n)
-;;          i n]
-;;     (if (zero? (% n i))
-;;       false
-;;       (recur (rest vec) ))))
-
-(range 2 10)
-(if (zero? (mod 10 2)) false true)
-(if (zero? (mod 10 3)) false true)
+(defn factorials-i [n]
+  (map factorial (range (+ n 1))))
 
 ;; (prime? 6) -> [2 3 4 5] -> false
 (defn prime? [n]
@@ -56,14 +45,14 @@
              :else (recur (rest num-list) (inc i)))))
   (if (= n 1)
     false
-    (= n (search n))))
+    (search n)))
+
+;; revise later to add range definition
+(defn primes-under [n]
+  (filter prime? (range 2 (+ n 1))))
 
 
 
-(prime? 3)
-(prime? 6)
-(prime? 1)
-(when (= 1 1) false)
 
 ;; [0,1,0,1,0] -> 0
 (count [1 2 3])
