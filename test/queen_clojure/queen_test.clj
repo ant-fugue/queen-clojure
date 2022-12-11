@@ -37,10 +37,28 @@
   (is (= 1 (num-of-div-except-self 2)))
   (is (= 3 (num-of-div-except-self 6))))
 
-(testing "div-sum"
+(testing "div-sum-except-self"
   (is (= 0 (div-sum-except-self 0)))
   (is (= 0 (div-sum-except-self 1)))
   (is (= 6 (div-sum-except-self 6))))
+
+(testing "perfect?"
+  (is (= false (perfect? 0)))
+  (is (= false (perfect? 1)))
+  (is (= true (perfect? 28)))
+  (is (= false (perfect? 7))))
+
+(testing "deficient?"
+  (is (= false (deficient? 0)))
+  (is (= true (deficient? 1)))
+  (is (= true (deficient? 17)))
+  (is (= false (deficient? 28))))
+
+(testing "abundant?"
+  (is (= false (abundant? 0)))
+  (is (= false (abundant? 1)))
+  (is (= true (abundant? 12)))
+  (is (= false  (abundant? 28))))
 
 (testing "prime?"
   (is (= true (prime? 2)))

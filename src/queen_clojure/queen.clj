@@ -25,6 +25,23 @@
 (defn div-sum-except-self [n]
   (apply + (div-of-except-self n)))
 
+
+
+(defn deficient? [n]
+  (cond  (zero? n) false
+         (> n (div-sum-except-self n)) true
+         :else false))
+
+(defn abundant? [n]
+  (cond  (zero? n) false
+         (< n (div-sum-except-self n)) true
+         :else false))
+
+(defn perfect? [n]
+  (cond  (zero? n) false
+         (= n (div-sum-except-self n)) true
+         :else false))
+
 (defn factorial [n]
   (loop [n n
          result 1]
