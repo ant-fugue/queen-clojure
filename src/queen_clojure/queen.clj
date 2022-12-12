@@ -54,6 +54,7 @@
 (defn factorials-i [n]
   (mapv factorial (range (+ n 1))))
 
+
 ;; (prime? 6) -> [2 3 4 5] -> false
 (defn prime? [n]
   (defn search [n]
@@ -78,27 +79,6 @@
 (group-by odd? [0 1 0 1 0])
 (group-by count ["a" "b" "a" "aa" "bb" "b"])
 
-(defn find-odd [xs]
-  (let [c (atom 0)
-        vec (sort xs)]))
-
-(def atomic-clock (atom 0))
-
-@atomic-clock
-
-"You can change at the swap meet"
-(do
-  (swap! atomic-clock inc)
-  @atomic-clock)
-
-;; 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
-;; 493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
-
-;; (apply + (mapv #(Integer/parseInt %) (clojure.string/split (str 132189) #"")))
-;; (defn digital-root [n]
-;;   (defn func [m]
-;;     (apply + (mapv #(Integer/parseInt %) (clojure.string/split (str m) #""))))
-;;   (loop [result 0 f (func m)])
-;;   (if (= 1 (count (str n))) result)
-
-;;   ())
+;; (defn find-odd [xs]
+;;   (let [c (atom 0)
+;;         vec (sort xs)]))
