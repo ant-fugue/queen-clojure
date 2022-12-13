@@ -52,6 +52,8 @@
 
 
 
+
+
 ;; A088054
 ;; [ 2 3 5   7    11       ]
 ;; [ 3 7 121 5041 39916801 ]
@@ -66,7 +68,9 @@
 ;;             :else (recur (inc i) result)))))
 
 
-
 ;; (factorial-primes-u 6)
+
+(defn A097285-seq-under [n]
+  (flatten (map reverse (queen/distinct-int-pairs n))))
 
 

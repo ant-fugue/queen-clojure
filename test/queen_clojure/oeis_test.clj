@@ -14,7 +14,11 @@
   (is (= 1 (alt-fact 2)))
   (is (= 101 (alt-fact 5))))
 
+
 (testing "digital-root"
   (is (= 0 (digital-root 0)))
   (is (= 1 (digital-root 1)))
   (is (= 6 (digital-root 132189))))
+
+(testing "A097285-seq-under"
+  (is (= [1 2 1 3 2 3 1 4 2 4 3 4] (A097285-seq-under 4))))

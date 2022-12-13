@@ -12,6 +12,11 @@
   (is (= '(1 1) (factorials-i 1)))
   (is (= '(1 1 2 6 24 120) (factorials-i 5))))
 
+(testing "distinct-int-pairs"
+  (is (= '() (distinct-int-pairs 0)))
+  (is (= '() (distinct-int-pairs 1)))
+  (is (= '((2 1) (3 1) (3 2) (4 1) (4 2) (4 3)) (distinct-int-pairs 4))))
+
 (testing "div-of"
   (is (= [] (div-of 0)))
   (is (= [1] (div-of 1)))

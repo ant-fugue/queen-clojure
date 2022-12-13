@@ -1,5 +1,10 @@
 (ns queen-clojure.queen)
 
+(defn distinct-int-pairs [n]
+  (apply concat
+         (map (fn [i] (map (fn [j] (list i j)) (range 1 i)))
+              (range 1 (inc n)))))
+
 (defn div-of [n]
   (loop [i n
          lst '()]
