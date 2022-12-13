@@ -71,6 +71,30 @@
 (defn primes-under [n]
   (filter prime? (range 2 (+ n 1))))
 
+(defn prime-factors [n]
+  (loop [n n
+         result []
+         div 2]
+    (cond (< n 2) result
+          (zero? (mod n div)) (recur (/ n div) (conj result div) div)
+          :else (recur n result (inc div)))))
+
+
+;; A005117 isSquarefree numbers
+(defn square-free? [num]
+  (let [prime-factors (prime-factors num)
+        prime-factors-length (count prime-factors)
+        prime-factors-set-length (count (set prime-factors))]
+    (cond (= num 0) false
+          (= num 1) true
+          (= prime-factors-length prime-factors-set-length) true
+          :else false)))
+
+(defn square-free-numbers-under [n]
+  (filterv square-free? (range 0 (inc n))))
+
+
+
 
 
 

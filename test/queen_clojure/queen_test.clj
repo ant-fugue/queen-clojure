@@ -66,6 +66,23 @@
   (is (= false (prime? 6)))
   (is (= false (prime? 1))))
 
+(testing "prime-factors"
+  (is (= [] (prime-factors 0)))
+  (is (= [] (prime-factors 1)))
+  (is (= [2] (prime-factors 2)))
+  (is (= [2 2 2 5 5 5] (prime-factors 1000))))
+
+(testing "square-free?"
+  (is (= false (square-free? 0)))
+  (is (= true (square-free? 1)))
+  (is (= true (square-free? 2)))
+  (is (= false (square-free? 1000))))
+
+(testing "square-free-numbers-under"
+  (is (= [] (square-free-numbers-under 0)))
+  (is (= [1] (square-free-numbers-under 1)))
+  (is (= [1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19] (square-free-numbers-under 20))))
+
 (testing "primes-under"
   (is (= '() (primes-under 0)))
   (is (= '() (primes-under 1)))
