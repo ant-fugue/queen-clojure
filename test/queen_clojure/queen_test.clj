@@ -99,3 +99,12 @@
   (is (= '() (primes-under 1)))
   (is (= '(2 3 5) (primes-under 5))))
 
+(testing "derange"
+  (is (= 1 (derange 0)))
+  (is (= 0 (derange 1)))
+  (is (= 1 (derange 2)))
+  (is (= 2 (derange 3))))
+
+(testing "derangements-under"
+  (is (= [1 0 1 2 9 44 265] (derangements-under 6))))
+

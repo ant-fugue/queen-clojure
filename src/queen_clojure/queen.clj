@@ -103,7 +103,15 @@
 (defn square-free-numbers-under [n]
   (filterv square-free? (range 0 (inc n))))
 
+(defn derange [n]
+  (cond (zero? n) 1
+        (= 1 n) 0
+        :else (* (dec n) (+ (derange (dec n)) (derange (- n 2))))))
 
+(derange 5)
+
+(defn derangements-under [i]
+  (map derange (range 0 (inc i))))
 
 
 
