@@ -22,3 +22,12 @@
 
 (testing "A097285-seq-under"
   (is (= [1 2 1 3 2 3 1 4 2 4 3 4] (A097285-seq-under 4))))
+
+(testing "power-sum-dig?"
+  (is (= true (power-sum-dig? 0)))
+  (is (= false (power-sum-dig? 10)))
+  (is (= true (power-sum-dig? 512)))
+  (is (= false (power-sum-dig? 321))))
+
+(testing "power-sum-seq-under"
+  (is (= [0 1 2 3 4 5 6 7 8 9 81 512 2401 4913 5832] (power-sum-seq-under 10000))))

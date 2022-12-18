@@ -51,6 +51,21 @@
        (f tmp)))))
 
 
+;; A023106
+;; 	a (n) is a power of the sum of its digits.
+(defn power-sum-dig? [n]
+  (loop [digit-sum (queen/digit-sum n)
+         i 0]
+    (cond
+      (< n 10) true
+      ;; avoid infinite loop when given number is the combination of first 1 and others 0.
+      (<= digit-sum 1) false
+      (< n (int (Math/pow digit-sum i))) false
+      (= n (int (Math/pow digit-sum i))) true
+      :else (recur digit-sum (inc i)))))
+
+(defn power-sum-seq-under [n]
+  (filter power-sum-dig? (range 0 n)))
 
 
 

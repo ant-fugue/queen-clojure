@@ -1,5 +1,10 @@
 (ns queen-clojure.queen)
 
+;; utils
+
+(defn digit-sum [n]
+  (apply + (map #(Integer/parseInt %) (clojure.string/split (str n) #""))))
+
 (defn distinct-int-pairs [n]
   (apply concat
          (map (fn [i] (map (fn [j] (list i j)) (range 1 i)))

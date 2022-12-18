@@ -2,6 +2,12 @@
   (:require [clojure.test :refer :all]
             [queen-clojure.queen :refer :all]))
 
+(testing "digit-sum"
+  (is (= 0 (digit-sum 0)))
+  (is (= 1 (digit-sum 1)))
+  (is (= 1 (digit-sum 10)))
+  (is (= 15 (digit-sum 12345))))
+
 (testing "factorial"
   (is (= 1 (factorial 0)))
   (is (= 1 (factorial 1)))
