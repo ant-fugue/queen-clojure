@@ -1,6 +1,14 @@
 (ns queen-clojure.queen)
 
 ;; utils
+(defn binary->dicimal [bin]
+  (let [bin-arr (map #(Integer/parseInt %) (clojure.string/split  bin #""))
+        reversed-indices (reverse (range 0 (count bin-arr)))
+        func #(int (* %1 (Math/pow 2 %2)))]
+    (apply + (map #(func %1 %2) bin-arr reversed-indices))))
+
+(binary->dicimal "1110")
+
 
 (defn digit-sum [n]
   (apply + (map #(Integer/parseInt %) (clojure.string/split (str n) #""))))

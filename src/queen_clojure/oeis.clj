@@ -87,4 +87,11 @@
 (defn A097285-seq-under [n]
   (flatten (map reverse (queen/distinct-int-pairs n))))
 
+(defn sq [n] (* n n))
+
+(mod 4 2)
+
+;; A000035
+;; (map #(mod (int (Math/pow % 2)) 2) (range 0 10))
+
 

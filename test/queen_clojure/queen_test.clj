@@ -2,6 +2,13 @@
   (:require [clojure.test :refer :all]
             [queen-clojure.queen :refer :all]))
 
+(testing "binary->dicimal"
+  (is (= 0) (binary->dicimal "0"))
+  (is (= 1) (binary->dicimal "1"))
+  (is (= 0) (binary->dicimal "0000"))
+  (is (= 1) (binary->dicimal "0001"))
+  (is (= 15) (binary->dicimal "1111")))
+
 (testing "digit-sum"
   (is (= 0 (digit-sum 0)))
   (is (= 1 (digit-sum 1)))
