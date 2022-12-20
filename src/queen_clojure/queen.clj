@@ -7,9 +7,6 @@
         func #(int (* %1 (Math/pow 2 %2)))]
     (apply + (map #(func %1 %2) bin-arr reversed-indices))))
 
-(binary->dicimal "1110")
-
-
 (defn digit-sum [n]
   (apply + (map #(Integer/parseInt %) (clojure.string/split (str n) #""))))
 
