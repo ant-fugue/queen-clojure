@@ -6,7 +6,8 @@
 ;; a(n) = floor(n*phi), where phi = (1+sqrt(5))/2 = A001622.
 (defn lower-wythoff-seq-i [i]
   (let [phi (/ (+ 1 (Math/sqrt 5)) 2)]
-    (mapv #(int (Math/floor (* % phi))) (range 1 (inc i)))))
+    (->> (range 1 (inc i))
+         (mapv #(int (Math/floor (* % phi)))))))
 
 ;; A002110
 ;; (map )(queen/primes-under 20)
@@ -19,7 +20,8 @@
 ;; A002064Cullen numbers C(n) = n**2^n+1
 ;; [0 1 2 3 4 5] -> [1 3 9 25 65]
 (defn cullen-seq-i [i]
-  (mapv #(int (+ 1 (* % (Math/pow 2 %)))) (range 0 i)))
+  (->> (range 0 i)
+       (mapv #(int (+ 1 (* % (Math/pow 2 %)))))))
 
 ;; A002310 a(n) = 5*a(n-1) - a(n-2). a(0)=1,a(1)=2
 
@@ -85,7 +87,9 @@
 ;; (factorial-primes-u 6)
 
 (defn A097285-seq-under [n]
-  (flatten (map reverse (queen/distinct-int-pairs n))))
+  (->> (queen/distinct-int-pairs n)
+       (map reverse)
+       (flatten)))
 
 (defn sq [n] (* n n))
 

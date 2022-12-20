@@ -8,12 +8,14 @@
     (apply + (map #(func %1 %2) bin-arr reversed-indices))))
 
 (defn digit-sum [n]
-  (apply + (map #(Integer/parseInt %) (clojure.string/split (str n) #""))))
+  (->> (clojure.string/split (str n) #"")
+       (map #(Integer/parseInt %))
+       (apply +)))
 
 (defn distinct-int-pairs [n]
-  (apply concat
-         (map (fn [i] (map (fn [j] (list i j)) (range 1 i)))
-              (range 1 (inc n)))))
+  (->> (range 1 (inc n))
+       (map (fn [i] (map (fn [j] (list i j)) (range 1 i))))
+       (apply concat)))
 
 (defn div-of [n]
   (loop [i n
