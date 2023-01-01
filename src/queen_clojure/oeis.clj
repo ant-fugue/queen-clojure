@@ -41,6 +41,14 @@
           (= positive? true) (recur (dec n) (- result (queen/factorial (dec n))) (not positive?))
           :else (recur (dec n) (+ result (queen/factorial (dec n))) (not positive?)))))
 
+;; A005384 Sophie Germain primes p: 2p+1 is also prime.
+(defn sophie-germain-p? [n]
+  (if (and (queen/prime? n) (queen/prime? (inc (* 2 n))))
+    true
+    false))
+
+(defn sophie-germain-p-under [n]
+  (filter sophie-germain-p? (queen/prime-seq n)))
 ;; A01088 digital root
 ;; 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
 (defn digital-root [n]
@@ -98,4 +106,23 @@
 ;; A000035
 ;; (map #(mod (int (Math/pow % 2)) 2) (range 0 10))
 
+
+;; (defn digit-sum [n]
+;;   (apply + (map #(Integer/parseInt %) (clojure.string/split (str n) #""))))
+
+;; (defn custom-log [num base]
+;;   (/ (Math/log num) (Math/log base)))
+
+;; (defn power-sum-dig? [n]
+;;   (let [dsum (digit-sum n)]
+;;     (if (or (< n 10) (<= dsum 1))
+;;       false
+;;       (->>
+;;        (custom-log n dsum)
+;;        (Math/pow dsum)
+;;        (int)
+;;       ;;  (= n)
+;;        ))))
+
+;; (power-sum-dig? 35)
 

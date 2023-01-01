@@ -3,11 +3,11 @@
             [queen-clojure.queen :refer :all]))
 
 (testing "binary->dicimal"
-  (is (= 0) (binary->dicimal "0"))
-  (is (= 1) (binary->dicimal "1"))
-  (is (= 0) (binary->dicimal "0000"))
-  (is (= 1) (binary->dicimal "0001"))
-  (is (= 15) (binary->dicimal "1111")))
+  (is (= 0 (binary->dicimal "0")))
+  (is (= 1 (binary->dicimal "1")))
+  (is (= 0 (binary->dicimal "0000")))
+  (is (= 1 (binary->dicimal "0001")))
+  (is (= 15 (binary->dicimal "1111"))))
 
 (testing "digit-sum"
   (is (= 0 (digit-sum 0)))
@@ -84,6 +84,12 @@
   (is (= false (prime? 6)))
   (is (= false (prime? 1))))
 
+(testing "composite?"
+  (is (= false (composite? 2)))
+  (is (= false (composite? 3)))
+  (is (= true (composite? 6)))
+  (is (= false (composite? 1))))
+
 (testing "prime-factors"
   (is (= [] (prime-factors 0)))
   (is (= [] (prime-factors 1)))
@@ -99,12 +105,18 @@
 (testing "square-free-numbers-under"
   (is (= [] (square-free-numbers-under 0)))
   (is (= [1] (square-free-numbers-under 1)))
-  (is (= [1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19] (square-free-numbers-under 20))))
+  (is (= [1 2 3 5 6 7 10 11 13 14 15 17 19] (square-free-numbers-under 20))))
 
-(testing "primes-under"
-  (is (= '() (primes-under 0)))
-  (is (= '() (primes-under 1)))
-  (is (= '(2 3 5) (primes-under 5))))
+(testing "primes-seq"
+  (is (= '() (prime-seq 0)))
+  (is (= '() (prime-seq 1)))
+  (is (= '(2 3 5) (prime-seq 5)))
+  (is (= '(5 7) (prime-seq 5 10))))
+
+(testing "composites-under"
+  (is (= '() (composites-under 0)))
+  (is (= '() (composites-under 1)))
+  (is (= '(4) (composites-under 5))))
 
 (testing "derange"
   (is (= 1 (derange 0)))
@@ -114,4 +126,7 @@
 
 (testing "derangements-under"
   (is (= [1 0 1 2 9 44 265] (derangements-under 6))))
+
+(testing "prime-gaps"
+  (is (= [1 2 2 4 2 4 2 4 6 2 6 4 2 4] (prime-gaps 50))))
 

@@ -31,3 +31,6 @@
 
 (testing "power-sum-seq-under"
   (is (= [0 1 2 3 4 5 6 7 8 9 81 512 2401 4913 5832] (power-sum-seq-under 10000))))
+
+(testing "sohpie-germain-p-under"
+  (is (= [2 3 5 11 23 29 41 53 83 89 113 131 173 179 191] (sophie-germain-p-under 200))))

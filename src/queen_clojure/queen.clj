@@ -1,14 +1,22 @@
-(ns queen-clojure.queen)
+(ns queen-clojure.queen
+  (:require [clojure.string :as str]))
 
 ;; utils
+(defn positions
+  [pred coll]
+  (keep-indexed (fn [idx x]
+                  (when (pred x)
+                    idx))
+                coll))
+
 (defn binary->dicimal [bin]
-  (let [bin-arr (map #(Integer/parseInt %) (clojure.string/split  bin #""))
+  (let [bin-arr (map #(Integer/parseInt %) (str/split  bin #""))
         reversed-indices (reverse (range 0 (count bin-arr)))
         func #(int (* %1 (Math/pow 2 %2)))]
     (apply + (map #(func %1 %2) bin-arr reversed-indices))))
 
 (defn digit-sum [n]
-  (->> (clojure.string/split (str n) #"")
+  (->> (str/split (str n) #"")
        (map #(Integer/parseInt %))
        (apply +)))
 
@@ -85,8 +93,19 @@
     (search n)))
 
 ;; revise later to add range definition
-(defn primes-under [n]
-  (filter prime? (range 2 (+ n 1))))
+(defn prime-seq
+  ([max]
+   (filter prime? (range 2 (inc max))))
+  ([min max]
+   (filter prime? (range min (inc max)))))
+
+(defn composite? [n]
+  (if (= n 1)
+    false
+    (not (prime? n))))
+
+(defn composites-under [n]
+  (filter composite? (range 2 (inc n))))
 
 (defn prime-factors [n]
   (loop [n n
@@ -120,14 +139,126 @@
 (defn derangements-under [i]
   (map derange (range 0 (inc i))))
 
+(defn prime-gaps [n]
+  (map - (prime-seq 3 n) (prime-seq n)))
 
-
-
-;; [0,1,0,1,0] -> 0
-(count [1 2 3])
-(group-by odd? [0 1 0 1 0])
-(group-by count ["a" "b" "a" "aa" "bb" "b"])
 
 ;; (defn find-odd [xs]
 ;;   (let [c (atom 0)
 ;;         vec (sort xs)]))
+
+;; (dotest 1071625, 1103735, "(1081184 1331967)")
+;; (dotest 57345, 90061, "(62744 75495)")
+;; (dotest 2382, 3679, "Nothing")
+;; (dotest 8983, 13355, "(9504 20735)")
+
+;; Divisors of 48: 1, 2, 3, 4, 6, 8, 12, 16, 24 --> sum: 76 = 75 + 1
+;; Divisors of 75: 1, 3, 5, 15, 25 --> sum: 49 = 48 + 1
+
+;; (n, m) are a pair of buddy if s (m) = n + 1 and s (n) = m + 1
+
+(defn buddy [start nd]
+  (let [num-seq (vec (range start (inc nd)))
+        sorted-pair-seq (->> num-seq
+                             (mapv #(concat [] [% (dec (div-sum-except-self %))]))
+                             (mapv sort))
+        buddy (->> sorted-pair-seq
+                   (map  #(when (<= 2 (count (positions #{%} sorted-pair-seq))) %))
+                   (remove nil?)
+                   (distinct)
+                   (first))]
+    buddy))
+
+(buddy 45 80)
+
+
+
+;; (def v [[1 2] [2 3] [1 2]])
+;; (map #(if (<= 2 (count (positions #{%} v)))
+;;         (conj result)) v)
+
+
+
+
+
+;; (map #(.indexOf "this" %) ["this" "pen" "this"])
+;; (map #(.lastIndexOf "this" %) ["this" "pen" "this"])
+;; (clojure.set/difference (set [[48 75] [49 7]]) (set [[48 75] [49 7] [75 48]]))
+
+;; (deftest example-tests
+;;   (is (= (array-diff [1 2] [1]) [2]))
+;;   (is (= (array-diff [1 2 2] [1]) [2 2]))
+;;   (is (= (array-diff [1 2 2] [2]) [1]))
+;;   (is (= (array-diff [1 2 2] []) [1 2 2]))
+;;   (is (= (array-diff [1 2 3] [1 2]) [3]))
+;;   (is (= (array-diff [] [1 2]) [])))
+
+(not (contains? #{[3]} [1 2]))
+#{[1 2]}
+
+
+;; (max-sequence [-2, 1, -3, 4, -1, 2, 1, -5, 4])
+;; should be 6: [4, -1, 2, 1]
+
+(defn max-sequence [xs])
+
+
+(hash-map :all [1 2 3 4 5])
+
+;; (defn f [seq]
+;;   (let [s1
+;;         (->> seq
+;;              (mapv #(str/split % #" "))
+;;              (mapv #(vec (conj [(str (nth (first %) 0))] (read-string (last %)))))
+;;              (map #(hash-map (keyword (str (first %))) (last %)))
+;;              (hash-map :all)
+;;              (merge-with +))
+;;         s2 []]
+;;     s1))
+
+
+
+;; (f ["BBAR 150", "CDXE 515", "BKWR 250", "BTSQ 890", "DRTY 600"])
+
+
+;; (apply #(merge-with + %1 %2 %3) '({:B 150} {:C 200} {:B 300}))
+(map #(contains? % :B) '({:B 150} {:C 200} {:B 300}))
+
+;; (into {}
+;;       (map
+;;        (fn [[k v]] [k (inc v)])
+;;        {:a 1 :b 2 :a 3}))
+
+;; (defn div-of-except-self [n]
+;;   (loop [i (int (/ n 2))
+;;          lst '()]
+;;     (cond (zero? i) lst
+;;           (zero? (mod n i)) (recur (dec i) (conj lst i))
+;;           :else (recur (dec i) lst))))
+
+;; (defn div-sum-except-self [n]
+;;   (apply + (div-of-except-self n)))
+
+;; (div-sum-except-self 10)
+
+;; (deftest Tests
+;;   (is (= (human-readable      0) "00:00:00"))
+;;   (is (= (human-readable     59) "00:00:59"))
+;;   (is (= (human-readable     60) "00:01:00"))
+;;   (is (= (human-readable     90) "00:01:30"))
+;;   (is (= (human-readable  86399) "23:59:59"))
+;;   (is (= (human-readable 359999) "99:59:29")))
+
+;; (def a 359949)
+
+;; (defn f [n]
+;;   (let [q (atom 0)
+;;         r (atom 0)]
+;;     (swap! q #(quot n 3600))
+;;     (swap! r #(rem n 60))
+;;     [@q @r]))
+
+;; (f 359949)
+
+
+
