@@ -24,6 +24,14 @@
        (mapv #(int (+ 1 (* % (Math/pow 2 %)))))))
 
 ;; A002310 a(n) = 5*a(n-1) - a(n-2). a(0)=1,a(1)=2
+(defn A002310 [i]
+  (cond (zero? i) 1
+        (= 1 i) 2
+        :else (- (* 5 (A002310 (dec i))) (A002310 (- i 2)))))
+
+(defn A002310-seq-i [i]
+  (->> (range 0 i)
+       (mapv A002310)))
 
 ;; A003387
 ;; (defn A003387-seq-i [i]

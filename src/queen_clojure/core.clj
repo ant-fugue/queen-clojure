@@ -2,12 +2,6 @@
   (:gen-class))
 
 
-(defn odd-sec [num] (filter odd? (range 0 num)))
-
-;; (defn cullen-numbers [num] (map (fn [n] (* n (m/pow 2 n))) (range 0 num)))
-
-
-
 
 
 (defn -main

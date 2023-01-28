@@ -30,6 +30,11 @@
   (is (= '() (distinct-int-pairs 1)))
   (is (= '((2 1) (3 1) (3 2) (4 1) (4 2) (4 3)) (distinct-int-pairs 4))))
 
+;; (testing "pytagorean-int-trios"
+;;   (is (= '() (pytagorean-int-trios 0)))
+;;   (is (= '() (pytagorean-int-trios 1)))
+;;   (is (= '([2 1 5] [3 1 10] [3 2 13] [4 1 17] [4 2 20] [4 3 25]) (pytagorean-int-trios 4))))
+
 (testing "div-of"
   (is (= [] (div-of 0)))
   (is (= [1] (div-of 1)))
@@ -129,4 +134,13 @@
 
 (testing "prime-gaps"
   (is (= [1 2 2 4 2 4 2 4 6 2 6 4 2 4] (prime-gaps 50))))
+
+(testing "fib"
+  (is (= [0 1 1 2 3 5 8 13 21 34] (map fib (range 0 10)))))
+
+(testing "lucas"
+  (is (= [2 1 3 4 7 11 18 29 47 76] (map lucas (range 0 10)))))
+
+(testing "tribonacci"
+  (is (= [0 0 1 1 2 4 7 13 24 44] (map tribonacci (range 0 10)))))
 

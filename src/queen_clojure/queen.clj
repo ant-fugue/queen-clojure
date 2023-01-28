@@ -21,9 +21,23 @@
        (apply +)))
 
 (defn distinct-int-pairs [n]
-  (->> (range 1 (inc n))
-       (map (fn [i] (map (fn [j] (list i j)) (range 1 i))))
-       (apply concat)))
+  (for [x (range 2 (inc n))
+        y (range 1 n) :while (> x y)]
+    [x y]))
+
+;; (defn pytagorean-int-trios [n]
+;;   (let [s1 (distinct-int-pairs n)
+;;         sq-and-sum (fn [a b] (+ (* a a) (* b b)))
+;;         f ()
+;;         s2 (map #(reduce sq-and-sum %) (distinct-int-pairs n))]
+;;     (->>
+;;      (map #(conj %1 %2) s1 s2)
+;;      (filter (fn [n] (let [root (Math/sqrt (last n))]
+;;                        (== root (int root)))))
+;;      (map #(int (Math/sqrt (last %)))))))
+
+;; (pytagorean-int-trios 20)
+
 
 (defn div-of [n]
   (loop [i n
@@ -143,6 +157,8 @@
   (map - (prime-seq 3 n) (prime-seq n)))
 
 
+
+
 ;; (defn find-odd [xs]
 ;;   (let [c (atom 0)
 ;;         vec (sort xs)]))
@@ -260,5 +276,21 @@
 
 ;; (f 359949)
 
+;; fibonacci variants
+(defn fib [n]
+  (if (or (zero? n) (= n 1))
+    n
+    (+ (fib (dec n)) (fib (- n 2)))))
 
+(defn lucas [n]
+  (cond (zero? n) 2
+        (= n 1) 1
+        :else (+ (lucas (dec n)) (lucas (- n 2)))))
 
+(defn tribonacci [n]
+  (cond (zero? n) 0
+        (= n 1) 0
+        (= n 2) 1
+        :else (+ (tribonacci (dec n))
+                 (tribonacci (- n 2))
+                 (tribonacci (- n 3)))))
