@@ -23,16 +23,6 @@
   (->> (range 0 i)
        (mapv #(int (+ 1 (* % (Math/pow 2 %)))))))
 
-;; A002310 a(n) = 5*a(n-1) - a(n-2). a(0)=1,a(1)=2
-(defn A002310 [i]
-  (cond (zero? i) 1
-        (= 1 i) 2
-        :else (- (* 5 (A002310 (dec i))) (A002310 (- i 2)))))
-
-(defn A002310-seq-i [i]
-  (->> (range 0 i)
-       (mapv A002310)))
-
 ;; A003387
 ;; (defn A003387-seq-i [i]
 ;;   (mapv #()))
@@ -134,3 +124,41 @@
 
 ;; (power-sum-dig? 35)
 
+;; fibonacci variants
+;; A002310 a(n) = 5*a(n-1) - a(n-2). a(0)=1,a(1)=2
+(defn A002310 [i]
+  (cond (zero? i) 1
+        (= 1 i) 2
+        :else (- (* 5 (A002310 (dec i))) (A002310 (- i 2)))))
+
+(defn A002310-seq-i [i]
+  (->> (range 0 i)
+       (mapv A002310)))
+
+(defn perrin [i]
+  (cond (zero? i) 3
+        (= 1 i) 0
+        (= 2 i) 2
+        :else (+ (perrin (- i 2)) (perrin (- i 3)))))
+
+(defn perrin-seq-i [i]
+  (->> (range 0 i)
+       (mapv perrin)))
+
+(defn A003815 [i]
+  (if (zero? i)
+    0
+    (+ i (* (int (Math/pow -1 i)) (A003815 (dec i))))))
+
+(defn A003815-seq-i [i]
+  (->> (range 0 i)
+       (mapv A003815)))
+
+(defn hofstadter-g [i]
+  (if (zero? i)
+    0
+    (- i (hofstadter-g (hofstadter-g (dec i))))))
+
+(defn hofstadter-g-seq-i [i]
+  (->> (range 0 i)
+       (mapv hofstadter-g)))

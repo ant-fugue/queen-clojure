@@ -8,9 +8,6 @@
 (testing "cullen-seq-i"
   (is (= [1 3 9 25 65] (cullen-seq-i 5))))
 
-(testing "A002310-seq-i"
-  (is (= [1 2 9 43 206] (A002310-seq-i 5))))
-
 (testing "alt-fact"
   (is (= nil (alt-fact 0)))
   (is (= 1 (alt-fact 1)))
@@ -37,3 +34,19 @@
 
 (testing "sohpie-germain-p-under"
   (is (= [2 3 5 11 23 29 41 53 83 89 113 131 173 179 191] (sophie-germain-p-under 200))))
+
+;; fib variants
+
+(testing "A002310-seq-i"
+  (is (= [1 2 9 43 206] (A002310-seq-i 5))))
+
+(testing "perrin-seq-i"
+  (is (= [3 0 2 3 2] (perrin-seq-i 5))))
+
+(testing "A003815-seq-i"
+  (is (= [0 1 3 0 4] (A003815-seq-i 5))))
+
+(testing "hofstadter-g-seq-i"
+  (is (= [0 1 1 2 3] (hofstadter-g-seq-i 5))))
+
+
