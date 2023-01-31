@@ -295,10 +295,20 @@
 ;; (f 359949)
 
 ;; fibonacci variants
+;; basic, but very slow recursive function
+;; (defn fib [n]
+;;   (if (or (zero? n) (= n 1))
+;;     n
+;;     (+ (fib (dec n)) (fib (- n 2)))))
+
 (defn fib [n]
-  (if (or (zero? n) (= n 1))
-    n
-    (+ (fib (dec n)) (fib (- n 2)))))
+  (let [root5 (Math/sqrt 5)]
+    (->>
+     (* (/ 1 root5)
+        (- (Math/pow (/ (+ 1 root5) 2) n)
+           (Math/pow (/ (- 1 root5) 2) n)))
+     (int))))
+
 
 (defn lucas [n]
   (cond (zero? n) 2
