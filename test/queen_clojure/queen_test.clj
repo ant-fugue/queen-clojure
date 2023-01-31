@@ -83,6 +83,11 @@
   (is (= true (abundant? 12)))
   (is (= false  (abundant? 28))))
 
+(testing "coprime?"
+  (is (= true (coprime? 36 5)))
+  (is (= true (coprime? 1 1)))
+  (is (= false (coprime? 92 23))))
+
 (testing "prime?"
   (is (= true (prime? 2)))
   (is (= true (prime? 3)))

@@ -38,7 +38,7 @@
 
 ;; (pytagorean-int-trios 20)
 
-
+;; div operations
 (defn div-of [n]
   (loop [i n
          lst '()]
@@ -79,6 +79,18 @@
          (= n (div-sum-except-self n)) true
          :else false))
 
+(defn coprime? [m n]
+  (let [m-div (div-of m)
+        n-div (div-of n)]
+    (->> (concat m-div n-div)
+         (remove #{1})
+         (frequencies)
+         (vals)
+         (every? #(= % 1)))))
+
+(coprime? 23 92)
+
+
 ;; [1 2 3 4 6 12] -> [2 4 6]
 ;; (defn semi-perfect? [n]
 ;;   )
@@ -106,12 +118,18 @@
     false
     (search n)))
 
+
 ;; revise later to add range definition
 (defn prime-seq
   ([max]
    (filter prime? (range 2 (inc max))))
   ([min max]
    (filter prime? (range min (inc max)))))
+
+;; [2 3 5 7]
+;; current is 5 -> generate [2 3 5] -> (inc (apply * [2 3 5]))
+(defn euclid-seq-under [n]
+  (->> (prime-seq n)))
 
 (defn composite? [n]
   (if (= n 1)
