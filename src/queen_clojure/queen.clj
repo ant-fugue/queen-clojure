@@ -88,9 +88,6 @@
          (vals)
          (every? #(= % 1)))))
 
-(coprime? 23 92)
-
-
 ;; [1 2 3 4 6 12] -> [2 4 6]
 ;; (defn semi-perfect? [n]
 ;;   )
@@ -322,3 +319,20 @@
         :else (+ (tribonacci (dec n))
                  (tribonacci (- n 2))
                  (tribonacci (- n 3)))))
+
+;; unclassified
+(defn kaprekar-routine [n]
+  (let [min (->>
+             (str n)
+             (sort)
+             (str/join)
+             (Integer/parseInt))
+        max (->>
+             (str n)
+             (sort #(compare %2 %1))
+             (str/join)
+             (Integer/parseInt))]
+    (- max min)))
+
+(kaprekar-routine 234)
+

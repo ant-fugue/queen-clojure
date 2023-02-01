@@ -149,3 +149,9 @@
 (testing "tribonacci"
   (is (= [0 0 1 1 2 4 7 13 24 44] (map tribonacci (range 0 10)))))
 
+(testing "kaprekar-routine"
+  (is (= 0 (kaprekar-routine 0)))
+  (is (= 0 (kaprekar-routine 333)))
+  (is (= 495 (kaprekar-routine 495)))
+  (is (= 198 (kaprekar-routine 324))))
+

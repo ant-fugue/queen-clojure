@@ -162,3 +162,13 @@
 (defn hofstadter-g-seq-i [i]
   (->> (range 0 i)
        (mapv hofstadter-g)))
+
+;; consecutive natural numbers are coprime, so this sequence is the same with the nat sequence
+;; (defn successive-coprimes-under [n]
+;;   (loop [i 1
+;;          v []]
+;;     (cond (= i n) v
+;;           (queen/coprime? i (inc i)) (recur  (inc i) (conj v i))
+;;           :else (recur (inc i) v))))
+
+;; (successive-coprimes-under 1000)
