@@ -307,10 +307,17 @@
      (int))))
 
 
+;; (defn lucas [n]
+;;   (cond (zero? n) 2
+;;         (= n 1) 1
+;;         :else (+ (lucas (dec n)) (lucas (- n 2)))))
+
 (defn lucas [n]
-  (cond (zero? n) 2
-        (= n 1) 1
-        :else (+ (lucas (dec n)) (lucas (- n 2)))))
+  (let [root5 (Math/sqrt 5)]
+    (->>
+     (+ (Math/pow (/ (+ 1 root5) 2) n)
+        (Math/pow (/ (- 1 root5) 2) n))
+     (int))))
 
 (defn tribonacci [n]
   (cond (zero? n) 0
@@ -334,5 +341,4 @@
              (Integer/parseInt))]
     (- max min)))
 
-(kaprekar-routine 234)
 
