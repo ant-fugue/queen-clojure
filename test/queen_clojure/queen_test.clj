@@ -143,6 +143,13 @@
 (testing "fib"
   (is (= [0 1 1 2 3 5 8 13 21 34] (map fib (range 0 10)))))
 
+(testing "fib-seq-under"
+  (is (= [0 1 1 2 3 5 8 13] (fib-seq-under 20))))
+
+(testing "zechkendorf-exp"
+  (is (=  '([] [1] [2] [3] [1 3] [5] [1 5] [2 5] [8] [1 8] [2 8]) (map zeckendorf-exp (range 0 11)))))
+
+
 (testing "lucas"
   (is (= [2 1 3 4 7 11 18 29 47 76] (map lucas (range 0 10)))))
 

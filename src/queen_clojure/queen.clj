@@ -306,6 +306,28 @@
            (Math/pow (/ (- 1 root5) 2) n)))
      (int))))
 
+(defn fib-seq-under [n]
+  (let [fib-seq (->> (iterate (fn [[a b]] [b (+ a b)]) [0 1])
+                     (take-while #(<= (first %) n)))]
+    (mapv first fib-seq)))
+
+(defn zeckendorf-exp [n]
+  (if (or (nil? n) (not (number? n)) (< n 0))
+    (throw (IllegalArgumentException. "Input must be a non-negative integer."))
+    (let [fibs (fib-seq-under n)]
+      (loop
+       [x n
+        fibs fibs
+        result []]
+        (cond
+          (= n (apply + result)) (vec (reverse result))
+          (empty? fibs) (vec (reverse result))
+          :else
+          (let [largest-fib (last fibs)
+                remaining (- x largest-fib)]
+            (if (>= remaining 0)
+              (recur remaining (butlast fibs) (conj result largest-fib))
+              (recur x (butlast fibs) result))))))))
 
 ;; (defn lucas [n]
 ;;   (cond (zero? n) 2
@@ -340,5 +362,34 @@
              (str/join)
              (Integer/parseInt))]
     (- max min)))
+
+(defn primes-seq-i [n]
+  (let [numbers (vec (range 2 (+ n 1)))
+        primes (vec (filter (fn [x] (nth numbers x)) numbers))]
+    (doseq [prime primes]
+      (loop [p (* prime prime) n (inc prime)]
+        (when (<= p n)
+          (when (nth numbers n)
+            (aset numbers n nil))
+          (recur (+ p prime) (inc n)))))
+    (take n primes)))
+
+;; (primes-seq-i 5)
+
+(defn primes-until [index]
+  (let [numbers (vec (range 2 (+ index 1)))
+        primes (vec (filter (fn [x] (nth numbers x)) numbers))]
+    (doseq [prime primes]
+      (loop [p (* prime prime) n (inc prime)]
+        (when (<= p index)
+          (when (nth numbers n)
+            (aset numbers n nil))
+          (recur (+ p prime) (inc n))))
+      (println prime))
+    primes))
+
+
+;; (mapv vector (range 10 30) (mapv zeckendorf-exp (range 10 30)))
+
 
 
