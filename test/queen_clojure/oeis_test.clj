@@ -5,6 +5,9 @@
 (testing "lower-wythoff-seq-i"
   (is (= [1 3 4 6 8] (lower-wythoff-seq-i 5))))
 
+(testing "powerful-seq-under"
+  (is (= [1 4 8 9 16 25 27 32 36 49 64 72 81] (powerful-seq-under 100))))
+
 (testing "cullen-seq-i"
   (is (= [1 3 9 25 65] (cullen-seq-i 5))))
 

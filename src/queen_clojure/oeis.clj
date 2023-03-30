@@ -9,6 +9,18 @@
     (->> (range 1 (inc i))
          (mapv #(int (Math/floor (* % phi)))))))
 
+;; A001694
+(defn powerful? [n]
+  (->> (queen/prime-factors n)
+       (set)
+       (vec)
+       (mapv #(zero? (mod n (* % %))))
+       (every? true?)))
+
+(defn powerful-seq-under [n]
+  (filterv powerful? (range 1 n)))
+
+
 ;; A002110
 ;; (map )(queen/primes-under 20)
 ;; (defn primorial-primes-under [n]
@@ -74,7 +86,6 @@
 
 (defn power-sum-seq-under [n]
   (filter power-sum-dig? (range 0 n)))
-
 
 ;; A088054
 ;; [ 2 3 5   7    11       ]
@@ -162,6 +173,8 @@
 (defn hofstadter-g-seq-i [i]
   (->> (range 0 i)
        (mapv hofstadter-g)))
+
+
 
 ;; consecutive natural numbers are coprime, so this sequence is the same with the nat sequence
 ;; (defn successive-coprimes-under [n]
