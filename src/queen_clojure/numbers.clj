@@ -5,13 +5,18 @@
 
 (defn reveal-characteristics [n]
   (let [message (atom [])]
-    (when (queen/prime? n) (swap! message conj "prime"))
-    (when (queen/square-free? n) (swap! message conj "square free"))
-    (when (queen/deficient? n) (swap! message conj "deficient"))
-    (when (queen/abundant? n) (swap! message conj "abundant"))
-    (when (queen/perfect? n) (swap! message conj "perfect"))
-    (when (oeis/sophie-germain-p? n) (swap! message conj "sophie germain prime"))
-    (when (oeis/power-sum-dig? n) (swap! message conj "power of the sum of its digits"))
+    (if (queen/prime? n)
+      (do
+        (swap! message conj "prime")
+        (if (oeis/sophie-germain-p? n) (swap! message conj "sophie germain prime") (swap! message conj "!sophie germain prime")))
+      (swap! message conj "!prime"))
+    (if (queen/square-free? n) (swap! message conj "square free") (swap! message conj "!square free"))
+    (swap! message conj (queen/div-group n))
+    (if (queen/highly-composite? n) (swap! message conj "highly-composite") (swap! message conj "!highly-composite"))
+    (if (queen/semiprime? n) (swap! message conj "semiprime") (swap! message conj "!semiprime"))
+    (if (oeis/power-sum-dig? n) (swap! message conj "power of the sum of its digits") (swap! message conj "!power of the sum of its digits"))
+    (if (oeis/powerful? n) (swap! message conj "powerful") (swap! message conj "!powerful"))
+    (if (oeis/harshad? n) (swap! message conj "harshad") (swap! message conj "!harshad"))
     (str/join "/" @message)))
 
 (defn output [start end]
@@ -23,5 +28,5 @@
 ;;   (doseq [x (output start end)]
 ;;     (println x)))
 
-(doseq [x (output 1 100)]
+(doseq [x (output 1 200)]
   (println x))

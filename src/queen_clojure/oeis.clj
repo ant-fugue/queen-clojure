@@ -20,6 +20,15 @@
 (defn powerful-seq-under [n]
   (filterv powerful? (range 1 n)))
 
+;; A052486　Achilles numbers
+(defn achilles? [n]
+  (cond (not (powerful? n)) false
+        (and (powerful? n) (not (queen/perfect? n))) true
+        :else false))
+
+(defn achilles-seq-under [n]
+  (filterv achilles? (range 1 n)))
+
 
 ;; A002110
 ;; (map )(queen/primes-under 20)
@@ -185,3 +194,18 @@
 ;;           :else (recur (inc i) v))))
 
 ;; (successive-coprimes-under 1000)
+
+;; A005349
+(defn harshad? [n]
+  (zero? (mod n (queen/digit-sum n))))
+
+(defn harshad-seq-under [n]
+  (filterv harshad? (range 1 n)))
+
+(filter queen/square-free? [46 30])
+
+(filter harshad? [137 175 135 131])
+(filter harshad? [111 112 121 118])
+(filter queen/square-free? [138 168 136 134])
+(filter queen/abundant? [138 134])
+(queen/prime-factors 112)

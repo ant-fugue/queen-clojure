@@ -8,6 +8,9 @@
 (testing "powerful-seq-under"
   (is (= [1 4 8 9 16 25 27 32 36 49 64 72 81] (powerful-seq-under 100))))
 
+;; (testing "achilles-seq-under"
+;;   (is (= [72] (achilles-seq-under 100))))
+
 (testing "cullen-seq-i"
   (is (= [1 3 9 25 65] (cullen-seq-i 5))))
 
@@ -52,4 +55,5 @@
 (testing "hofstadter-g-seq-i"
   (is (= [0 1 1 2 3] (hofstadter-g-seq-i 5))))
 
-
+(testing "harshard-seq-under"
+  (is (= [1 2 3 4 5 6 7 8 9 10 12 18 20 21 24 27 30 36] (harshad-seq-under 40))))

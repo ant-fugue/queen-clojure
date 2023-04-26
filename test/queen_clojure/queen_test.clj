@@ -83,10 +83,19 @@
   (is (= true (abundant? 12)))
   (is (= false  (abundant? 28))))
 
+(testing "div-group"
+  (is (= "deficient" (div-group 2)))
+  (is (= "perfect" (div-group 6)))
+  (is (= "abundant" (div-group 12))))
+
 (testing "coprime?"
   (is (= true (coprime? 36 5)))
   (is (= true (coprime? 1 1)))
   (is (= false (coprime? 92 23))))
+
+;; (testing "perfect-power-under"
+;;   (is (= [1 4 8 9 16 25 27 32 36 49 64 81] (perfect-power-under 100))))
+
 
 (testing "prime?"
   (is (= true (prime? 2)))
@@ -106,6 +115,9 @@
   (is (= [2] (prime-factors 2)))
   (is (= [2 2 2 5 5 5] (prime-factors 1000))))
 
+(testing "semiprime?"
+  (is (= [4 6 9 10 14 15 21 22 25 26] (semi-prime-under 30))))
+
 (testing "square-free?"
   (is (= false (square-free? 0)))
   (is (= true (square-free? 1)))
@@ -114,7 +126,7 @@
 
 (testing "square-free-numbers-under"
   (is (= [] (square-free-numbers-under 0)))
-  (is (= [1] (square-free-numbers-under 1)))
+  (is (= [] (square-free-numbers-under 1)))
   (is (= [1 2 3 5 6 7 10 11 13 14 15 17 19] (square-free-numbers-under 20))))
 
 (testing "primes-seq"
@@ -127,6 +139,9 @@
   (is (= '() (composites-under 0)))
   (is (= '() (composites-under 1)))
   (is (= '(4) (composites-under 5))))
+
+(testing "highly-composite-under"
+  (is (= [1 2 4 6 12 24 36 48 60] (highly-composite-under 100))))
 
 (testing "derange"
   (is (= 1 (derange 0)))

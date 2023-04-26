@@ -38,7 +38,7 @@
 
 ;; (pytagorean-int-trios 20)
 
-;; div operations
+;; cat div operations
 (defn div-of [n]
   (loop [i n
          lst '()]
@@ -78,6 +78,11 @@
   (cond  (zero? n) false
          (= n (div-sum-except-self n)) true
          :else false))
+
+(defn div-group [n]
+  (cond (= n (div-sum-except-self n)) "perfect"
+        (< n (div-sum-except-self n)) "abundant"
+        (> n (div-sum-except-self n)) "deficient"))
 
 (defn coprime? [m n]
   (let [m-div (div-of m)
@@ -134,7 +139,16 @@
     (not (prime? n))))
 
 (defn composites-under [n]
-  (filter composite? (range 2 (inc n))))
+  (filterv composite? (range 2 n)))
+
+(defn highly-composite? [n]
+  (->> (range 1 n)
+       (mapv num-of-div)
+       (every? #(< % (num-of-div n)))))
+
+;; A002182
+(defn highly-composite-under [n]
+  (filterv highly-composite? (range 1 n)))
 
 (defn prime-factors [n]
   (loop [n n
@@ -143,6 +157,27 @@
     (cond (< n 2) result
           (zero? (mod n div)) (recur (/ n div) (conj result div) div)
           :else (recur n result (inc div)))))
+
+(defn semiprime? [n]
+  (let [pf (prime-factors n)]
+    (if (= (count pf) 2)
+      true
+      false)))
+
+(defn semi-prime-under [n]
+  (filterv semiprime? (range 1 n)))
+
+;; !間違い
+(defn perfect-power? [n]
+  (->> (prime-factors n)
+       (set)
+      ;;  (= 1 count)
+       ))
+
+(perfect-power? 36)
+
+(defn perfect-power-under [n]
+  (filterv perfect-power? (range 1 n)))
 
 
 ;; A005117 isSquarefree numbers
@@ -156,7 +191,7 @@
           :else false)))
 
 (defn square-free-numbers-under [n]
-  (filterv square-free? (range 0 (inc n))))
+  (filterv square-free? (range 0 n)))
 
 (defn derange [n]
   (cond (zero? n) 1
@@ -291,7 +326,7 @@
 
 ;; (f 359949)
 
-;; fibonacci variants
+;; cat fibonacci variants
 ;; basic, but very slow recursive function
 ;; (defn fib [n]
 ;;   (if (or (zero? n) (= n 1))
@@ -349,7 +384,7 @@
                  (tribonacci (- n 2))
                  (tribonacci (- n 3)))))
 
-;; unclassified
+;; cat unclassified
 (defn kaprekar-routine [n]
   (let [min (->>
              (str n)
@@ -390,6 +425,9 @@
 
 
 ;; (mapv vector (range 10 30) (mapv zeckendorf-exp (range 10 30)))
-
-
-
+(div-sum-except-self 128)
+(div-sum-except-self 6)
+(prime-factors 136)
+(deficient? 63)
+(deficient? 18)
+(deficient? 99)
