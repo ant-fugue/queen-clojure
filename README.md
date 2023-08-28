@@ -11,12 +11,6 @@ Most of the case, type 1 is generated with filtering the integer collection usin
 
 For exapmle, prime? is used in type 1, and factorial is used in type 2.
 
-## Usage
-
-FIXME: explanation
-
-    $ java -jar queen-clojure-0.1.0-standalone.jar [args]
-
 ## License
 
 Copyright © 2022 Shohei Matsuda
