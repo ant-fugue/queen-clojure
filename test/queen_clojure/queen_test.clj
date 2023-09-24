@@ -177,3 +177,9 @@
   (is (= 495 (kaprekar-routine 495)))
   (is (= 198 (kaprekar-routine 324))))
 
+(testing "kaprekar-routine-seq"
+  (is (= [0] (kaprekar-routine-seq 0)))
+  (is (= [0] (kaprekar-routine-seq 333)))
+  (is (= [495] (kaprekar-routine-seq 495)))
+  (is (= [198 792 693 594 495] (kaprekar-routine-seq 324))))
+

@@ -398,6 +398,14 @@
              (Integer/parseInt))]
     (- max min)))
 
+(defn kaprekar-routine-seq [n]
+  (loop [result []
+         current n]
+    (let [next (kaprekar-routine current)]
+      (if (or (= next 495) (= next 0))
+        (conj result next)
+        (recur (conj result next) next)))))
+
 (defn primes-seq-i [n]
   (let [numbers (vec (range 2 (+ n 1)))
         primes (vec (filter (fn [x] (nth numbers x)) numbers))]
