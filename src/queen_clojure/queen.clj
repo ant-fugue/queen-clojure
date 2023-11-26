@@ -109,16 +109,17 @@
 
 
 ;; (prime? 6) -> [2 3 4 5] -> false
+
 (defn prime? [n]
-  (defn search [n]
-    (loop [num-list (range 2 n)
-           i 2]
-      (cond  (empty? num-list) true
-             (zero? (mod n i)) false
-             :else (recur (rest num-list) (inc i)))))
-  (if (= n 1)
-    false
-    (search n)))
+  (let [search (fn [n]
+                 (loop [num-list (range 2 n) i 2]
+                   (cond  (empty? num-list) true
+                          (zero? (mod n i)) false
+                          :else (recur (rest num-list) (inc i)))))]
+    (if (= n 1)
+      false
+      (search n))))
+
 
 
 ;; revise later to add range definition
