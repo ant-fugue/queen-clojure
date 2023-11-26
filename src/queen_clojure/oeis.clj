@@ -202,6 +202,21 @@
 (defn harshad-seq-under [n]
   (filterv harshad? (range 1 n)))
 
+;; (defn motzkin-gen [n]
+;;   (/ (* 2 (queen/factorial n)) ))
+
+;; Mn = (2n)! / ((n + 1)! * n!)
+(defn motzkin-gen [n]
+  (->> (queen/factorial (* 2 n))
+       (/ (* (queen/factorial (inc n))
+             (queen/factorial n)))))
+
+(defn motzkin-seq-under-i [i]
+  (->> (range 0 i)
+       (mapv motzkin-gen)))
+
+(motzkin-seq-under-i 5)
+
 (filter queen/square-free? [46 30])
 
 (filter harshad? [137 175 135 131])
