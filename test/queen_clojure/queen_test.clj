@@ -94,6 +94,11 @@
     (is (= true (coprime? 1 1)))
     (is (= false (coprime? 92 23))))
 
+  (testing "is-perfect-square?"
+    (is (= true (is-perfect-square? 0)))
+    (is    (= false (is-perfect-square? 5)))
+    (is    (= true (is-perfect-square? 36))))
+
 ;; (testing "perfect-power-under"
 ;;   (is (= [1 4 8 9 16 25 27 32 36 49 64 81] (perfect-power-under 100))))
 
@@ -158,6 +163,9 @@
 
   (testing "fib"
     (is (= [0 1 1 2 3 5 8 13 21 34] (map fib (range 0 10)))))
+
+  (testing "is-fib?"
+    (is (= [0 1 1 2 3 5 8 13 21] (filter is-fib? (range 0 30)))))
 
   (testing "fib-seq-under"
     (is (= [0 1 1 2 3 5 8 13] (fib-seq-under 20))))

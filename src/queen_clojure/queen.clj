@@ -180,6 +180,10 @@
 (defn perfect-power-under [n]
   (filterv perfect-power? (range 1 n)))
 
+(defn is-perfect-square? [n]
+  (let [sqrt-n (int (Math/sqrt n))]
+    (= (* sqrt-n sqrt-n) n)))
+
 
 ;; A005117 isSquarefree numbers
 (defn square-free? [num]
@@ -346,6 +350,11 @@
   (let [fib-seq (->> (iterate (fn [[a b]] [b (+ a b)]) [0 1])
                      (take-while #(<= (first %) n)))]
     (mapv first fib-seq)))
+
+;;; error check later
+(defn is-fib? [n]
+  (let [lst (fib-seq-under n)]
+    (some #{n} lst)))
 
 (defn zeckendorf-exp [n]
   (if (or (nil? n) (not (number? n)) (< n 0))
