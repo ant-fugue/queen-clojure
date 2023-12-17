@@ -6,6 +6,9 @@
   (testing "lower-wythoff-seq-i"
     (is (= [1 3 4 6 8] (lower-wythoff-seq-i 5))))
 
+  (testing "perfect-seq"
+    (is (= [6 28 496 8128] (perfect-seq 10000))))
+
   (testing "powerful-seq-under"
     (is (= [1 4 8 9 16 25 27 32 36 49 64 72 81] (powerful-seq-under 100))))
 

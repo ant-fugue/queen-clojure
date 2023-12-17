@@ -9,6 +9,10 @@
     (->> (range 1 (inc i))
          (mapv #(int (Math/floor (* % phi)))))))
 
+;; A000396(perfect number sequence)
+(defn perfect-seq [n]
+  (filterv queen/perfect? (range 0 n)))
+
 ;; A001694
 (defn powerful? [n]
   (->> (queen/prime-factors n)
