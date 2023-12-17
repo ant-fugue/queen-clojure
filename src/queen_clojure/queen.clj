@@ -352,9 +352,9 @@
     (mapv first fib-seq)))
 
 ;;; error check later
-(defn is-fib? [n]
-  (let [lst (fib-seq-under n)]
-    (some #{n} lst)))
+;; (defn is-fib? [n]
+;;   (let [lst (fib-seq-under n)]
+;;     (some #{n} lst)))
 
 (defn zeckendorf-exp [n]
   (if (or (nil? n) (not (number? n)) (< n 0))
